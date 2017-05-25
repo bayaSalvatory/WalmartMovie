@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WalmartMovie</string>
+    <string name="search">Search</string>
+    <string name="movie_details">movie details</string>
+    <string name="done">done</string>
+    <string name="prompt_search_msg">Search for your favourite movie using the search bar above. have fun :)</string>
+</resources>

@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+    defaultConfig {
+        applicationId "com.baya.walmartmovie"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "int", "LIMIT", "100"
+        buildConfigField "String", "BASEURL", "\"https://api.themoviedb.org/\""
+        buildConfigField "int", "CACHETIME", "432000" // 5days
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+/*
+ Dependency versions are defined in the top level build.gradle file. This helps keeping track of
+ all versions in a single place. This improves readability and helps managing project complexity.
+ */
+dependencies {
+    // App's dependencies, including test
+    compile "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
+    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.supportLibraryVersion"
+    compile "com.google.guava:guava:$rootProject.guavaVersion"
+
+    // Dependencies for networking
+    compile "com.google.code.gson:gson:$rootProject.gsonVersion"
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit2Version"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit2Version"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofit2Version"
+    compile "com.squareup.retrofit2:converter-scalars:$rootProject.retrofit2Version"
+    compile "io.reactivex:rxandroid:$rootProject.rxandroidVersion"
+    compile "io.reactivex:rxjava:$rootProject.rxjavaVersion"
+
+    // Dependencies for DI
+    compile "com.google.dagger:dagger:$rootProject.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    // Dependencies for View binding
+    compile "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
+
+    // Dependencies for local unit testing
+    testCompile "junit:junit:$rootProject.ext.junitVersion"
+
+    // Dependencies for Android unit tests
+    androidTestCompile "junit:junit:$rootProject.ext.junitVersion"
+
+    // Espresso UI testing
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
+
+    // Resolve conflicts between main and test APK:
+    androidTestCompile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+}
